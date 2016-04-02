@@ -38,10 +38,10 @@ use yii\widgets\ActiveForm;
         </div>
     <?php ActiveForm::end(); ?><br>
     <?php
-    	$mod = $model::findOne(2);
+    	$mod = $model::findOne(1);
     	?>
 
-<img src="<?= $mod->image ?>" alt="альтернативный текст">
+<img src="<?= $mod->image ?>" alt="<?= $mod->image ?>">
 
 
 </div><!-- new-index -->
