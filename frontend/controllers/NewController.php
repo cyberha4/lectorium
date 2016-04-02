@@ -2,13 +2,16 @@
 
 namespace frontend\controllers;
 
-use app\models\Cont;
+use frontend\models\Scientist;
 use Yii;
 
 //use app\models\UploadForm;
 use yii\web\UploadedFile;
 use yii\imagine\Image;
 
+use Imagine\Gd;
+use Imagine\Image\Box;
+use Imagine\Image\BoxInterface;
 
 class NewController extends \yii\web\Controller
 {
@@ -29,7 +32,7 @@ class NewController extends \yii\web\Controller
     }
     public function actionCreate()
     {
-        $model = new Cont();
+        $model = new Scientist ();
 
         if ($model->load(Yii::$app->request->post())) {
             $file = UploadedFile::getInstance($model, 'file');
@@ -37,48 +40,36 @@ class NewController extends \yii\web\Controller
                 $model->file = $file;
                 if ($model->validate(['file'])) {
                     
-                    switch ($model->material_type) {
-                        case 0:
-                            $material_type = '';
-                            break;
-                        case 1:
-                            $material_type = 'news/';
-                            break;
-                        case 2:
-                            $material_type = 'persons/';
-                            break;
-                        case 3:
-                            $material_type = 'movies/';
-                            break;
-                        case 4:
-                            $material_type = 'interview/';
-                            break;
-                    }
+                    $material_type = '';
+
+                    $alias = 'images/';
                     
-                    $dir = Yii::getAlias('images/blog/'.$material_type);
+                    $dir = Yii::getAlias('@frontend/web/'.$alias);
+                    echo $dir;
                     $fileName = $model->file->baseName . '.' . $model->file->extension;
                     $model->file->saveAs($dir . $fileName);
                     $model->file = $fileName; // без этого ошибка
-                    $model->image = '/'.$dir . $fileName;
-// Для ресайза фотки до 800x800px по большей стороне надо обращаться к функции Box() или widen, так как в обертках доступны только 5 простых функций: crop, frame, getImagine, setImagine, text, thumbnail, watermark
+                    $model->image = '/'.$alias . $fileName;
+                // Для ресайза фотки до 800x800px по большей стороне надо обращаться к функции Box() или widen, так как в обертках доступны только 5 простых функций: crop, frame, getImagine, setImagine, text, thumbnail, watermark
                     $photo = Image::getImagine()->open($dir . $fileName);
                     $photo->thumbnail(new Box(800, 800))->save($dir . $fileName, ['quality' => 90]);
                     //$imagineObj = new Imagine();
                     //$imageObj = $imagineObj->open(\Yii::$app->basePath . $dir . $fileName);
                     //$imageObj->resize($imageObj->getSize()->widen(400))->save(\Yii::$app->basePath . $dir . $fileName);
                     
-                    Yii::$app->controller->createDirectory(Yii::getAlias('images/blog/'.$material_type.'/thumbs')); 
+                    Yii::$app->controller->createDirectory(Yii::getAlias('@frontend/web/images/')); 
                     Image::thumbnail($dir . $fileName, 150, 70)
                     ->save(Yii::getAlias($dir .'thumbs/'. $fileName), ['quality' => 80]);
                 }
             } 
             if ($model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
+                //return $this->redirect(['view', 'id' => $model->id]);
+                echo "good";
             }               
             
             
         } else {
-            return $this->render('create', [
+            return $this->render('index', [
                 'model' => $model,
             ]);
         }

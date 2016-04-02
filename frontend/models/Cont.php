@@ -12,7 +12,7 @@ use yii\web\UploadedFile;
  * @property string $text
  * @property string $url
  */
-class Cont extends \yii\db\ActiveRecord
+class ScientistForm extends \yii\db\ActiveRecord
 {
     public $file;
     public $del_img;

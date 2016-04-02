@@ -15,6 +15,9 @@ use Yii;
  */
 class Scientist extends \yii\db\ActiveRecord
 {
+    public $file;
+    public $del_img;
+    
     /**
      * @inheritdoc
      */
@@ -32,6 +35,9 @@ class Scientist extends \yii\db\ActiveRecord
             [['name', 'city', 'biography', 'achievements'], 'required'],
             [['biography', 'achievements'], 'string'],
             [['name', 'city'], 'string', 'max' => 255],
+            [['file'], 'file', 'extensions' => 'png, jpg'],
+            [['del_img'], 'boolean'],
+
         ];
     }
 
