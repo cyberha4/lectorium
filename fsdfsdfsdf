@@ -1,0 +1,29 @@
+[33mcommit b045f15b1d7ee6c312a2ed0cbcb1d2ad9f0e00eb[m
+Author: kiberha4 <proffi99@mail.ru>
+Date:   Sun Apr 3 08:32:43 2016 +0400
+
+    add crud for scientist model
+
+[33mcommit f16f329b2b64dedad8d33a09125e4db4d5902bb8[m
+Author: kiberha4 <proffi99@mail.ru>
+Date:   Sat Apr 2 22:17:48 2016 +0400
+
+    if cell of image is empty in table_scientist show default picture
+
+[33mcommit 7adf9afa5eebab3540f5880ca03584ca41c87dca[m
+Author: kiberha4 <proffi99@mail.ru>
+Date:   Sat Apr 2 17:19:53 2016 +0400
+
+    for fun added event (after find) in scetnmodel which doesnt upload photos
+
+[33mcommit ea4f462876b49a1480f96c17fb37c559e06e3d9b[m
+Author: kiberha4 <proffi99@mail.ru>
+Date:   Sat Apr 2 15:36:06 2016 +0400
+
+    install upload images in scientistContr
+
+[33mcommit eca76e046b58b14111107529ebfe44b2bfc340d4[m
+Author: kiberha4 <proffi99@mail.ru>
+Date:   Sat Apr 2 12:51:54 2016 +0400
+
+    first commit

@@ -75,6 +75,15 @@ class NewController extends \yii\web\Controller
         }
     }
 
+    public function actionView($id = 1) 
+    {
+        $model = Scientist::findOne($id);
+
+        return $this->render('view', [
+                'model' => $model,
+            ]);
+    }
+
 
     public function createDirectory($path) {   
     //$filename = "/folder/{$dirname}/";  
