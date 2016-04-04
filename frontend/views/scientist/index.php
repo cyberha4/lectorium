@@ -30,6 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'city',
                 'biography:ntext',
                 'achievements:ntext',
+                'status',
                 // 'image',
     
                 ['class' => 'yii\grid\ActionColumn'],

@@ -15,6 +15,15 @@ use Yii;
  */
 class Scientist extends \yii\db\ActiveRecord
 {
+    /**
+     * Статус ученого: активен.
+     */
+    const STATUS_ACTIVE = 1;
+    /**
+     * Статус ученого: удален.
+     */
+    const STATUS_DELETE = 0;
+
     public $file;
     public $del_img;
     
@@ -53,7 +62,7 @@ class Scientist extends \yii\db\ActiveRecord
         }
         //$this->image?:'/images/teacher.jpg';
 
-        Yii::info('its event after find file exist'.$this->image);
+        Yii::info('its event after find file exist '.$this->image, __METHOD__);
     }
 
     /**
@@ -67,6 +76,24 @@ class Scientist extends \yii\db\ActiveRecord
             'city' => 'City',
             'biography' => 'Biography',
             'achievements' => 'Achievements',
+            'status' => 'Статус',
         ];
     }
+
+    //public function getScientist($id)
+    //{
+    //    if (
+    //        ($model = Post::findOne($id)) !== null &&
+    //        $model->isPublished()
+    //    ) {
+    //        return $model;
+    //    } else {
+    //        throw new NotFoundHttpException('The requested post does not exist.');
+    //    }
+    //}
+//
+    //protected function isPublished()
+    //{
+    //    return $this->publish_status === self::STATUS_PUBLISH;
+    //}
 }

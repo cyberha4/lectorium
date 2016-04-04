@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\Cont */
+/* @var $model app\models\Scientist */
 /* @var $form ActiveForm */
 ?>
 <div class="new-index">
@@ -38,10 +38,11 @@ use yii\widgets\ActiveForm;
         </div>
     <?php ActiveForm::end(); ?><br>
     <?php
-    	$mod = $model::findOne(1);
+    	$mod = $model->image ? '' : $model::findOne(1);
     	?>
 
-<img src="<?= $mod->image ?>" alt="<?= $mod->image ?>">
+<img src="<?= $mod->image ?>" alt="<?= $mod->image ?>"><br>
+<iframe width="640" height="360" src="http://www.youtube.com/embed/-EEllPq8LvI" frameborder="0" allowfullscreen></iframe><br><em><a href="http://www.lektorium.tv/lecture/28018">Посмотреть видео</a> на сайте <a href="http://www.lektorium.tv">Лекториума</a></em>
 
 
 </div><!-- new-index -->
