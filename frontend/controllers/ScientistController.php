@@ -26,7 +26,7 @@ class ScientistController extends Controller
      * @inheritdoc
      */
 
-    private $model = null;
+    private $_model;
 
     public function behaviors()
     {
@@ -49,7 +49,9 @@ class ScientistController extends Controller
                     [
                         'allow' => true,
                         'actions' => ['update'],
-                        'roles' => ['ScientistUpdate'],
+                        'matchCallback' => function ($rule, $action) {
+                        return Yii::$app->user->can('ScientistUpdate', ['scientist' => $this->findModel(Yii::$app->request->get('id'))]);
+                    }
                     ],
                 ],
             ],
@@ -168,16 +170,20 @@ class ScientistController extends Controller
      */
     protected function findModel($id)
     {
-        $model  = Scientist::findOne([
-            'id' => $id,
-            'status' => Scientist::STATUS_ACTIVE,
-        ]);
 
-        if ($model !== null) {
-            return $model;
-        } else {
-            throw new NotFoundHttpException('The requested page does not exist.');
+        \c_log(0);
+        if ($this->_model === null) {
+            \c_log(1);
+            $this->_model = Scientist::findOne([
+                'id' => $id,
+                'status' => Scientist::STATUS_ACTIVE,
+            ]);
         }
+        if ($this->_model !== null) {
+            return $this->_model;
+        } 
+        throw new NotFoundHttpException('The requested page does not exist.');
+
     }
 
     protected function createDirectory($path) {   

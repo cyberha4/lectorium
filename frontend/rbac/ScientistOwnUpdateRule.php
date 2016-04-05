@@ -20,11 +20,11 @@ class ScientistOwnUpdateRule extends Rule
      */
     public function execute($user, $item, $params)
     {
-		if (!isset($params['user'])) {
-			return false;
-		}
-		
-		
-        return false;
+		\c_log("$user - ".$params['scientist']->name);
+				
+        if (!isset($params['scientist'])) {
+            return false;
+        }
+        return ($params['scientist']->user_id == $user);
     }
 }
