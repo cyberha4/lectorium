@@ -8,6 +8,7 @@ use frontend\models\ScientistSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
 
 use yii\web\UploadedFile;
 use yii\imagine\Image;
@@ -24,6 +25,9 @@ class ScientistController extends Controller
     /**
      * @inheritdoc
      */
+
+    private $model = null;
+
     public function behaviors()
     {
         return [
@@ -31,6 +35,22 @@ class ScientistController extends Controller
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['POST'],
+                ],
+            ],
+            'access' => [
+                'class' => AccessControl::className(),
+                'only' => ['create', 'update'],
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'actions' => ['create'],
+                        'roles' => ['ScientistCreate'],
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['update'],
+                        'roles' => ['ScientistUpdate'],
+                    ],
                 ],
             ],
         ];
@@ -89,32 +109,6 @@ class ScientistController extends Controller
                 'model' => $model,
             ]);
         }
-    }
-
-    protected function uploadPhoto (&$model) {
-        if ($model->validate(['file'])) {
-                    
-                    $material_type = '';
-
-                    $alias = 'images/';
-                    
-                    $dir = Yii::getAlias('@frontend/web/'.$alias);
-                    $fileName = $model->file->baseName . '.' . $model->file->extension;
-                    $model->file->saveAs($dir . $fileName);
-                    $model->file = $fileName; // без этого ошибка
-                    $model->image = '/'.$alias . $fileName;
-                // Для ресайза фотки до 800x800px по большей стороне надо обращаться к функции Box() или widen, так как в обертках доступны только 5 простых функций: crop, frame, getImagine, setImagine, text, thumbnail, watermark
-                    $photo = Image::getImagine()->open($dir . $fileName);
-                    $photo->thumbnail(new Box(800, 800))->save($dir . $fileName, ['quality' => 90]);
-                    //$imagineObj = new Imagine();
-                    //$imageObj = $imagineObj->open(\Yii::$app->basePath . $dir . $fileName);
-                    //$imageObj->resize($imageObj->getSize()->widen(400))->save(\Yii::$app->basePath . $dir . $fileName);
-                    
-                    Yii::$app->controller->createDirectory(Yii::getAlias('@frontend/web/images/')); 
-                    Image::thumbnail($dir . $fileName, 150, 70)
-                    ->save(Yii::getAlias($dir .'thumbs/'. $fileName), ['quality' => 80]);
-                }
-
     }
 
     /**
@@ -186,7 +180,7 @@ class ScientistController extends Controller
         }
     }
 
-    public function createDirectory($path) {   
+    protected function createDirectory($path) {   
         //$filename = "/folder/{$dirname}/";  
         if (file_exists($path)) {  
             //echo "The directory {$path} exists";  
@@ -194,5 +188,31 @@ class ScientistController extends Controller
             mkdir($path, 0775, true);  
             //echo "The directory {$path} was successfully created.";  
         }
+    }
+
+    protected function uploadPhoto (&$model) {
+        if ($model->validate(['file'])) {
+                    
+                    $material_type = '';
+
+                    $alias = 'images/';
+                    
+                    $dir = Yii::getAlias('@frontend/web/'.$alias);
+                    $fileName = $model->file->baseName . '.' . $model->file->extension;
+                    $model->file->saveAs($dir . $fileName);
+                    $model->file = $fileName; // без этого ошибка
+                    $model->image = '/'.$alias . $fileName;
+                // Для ресайза фотки до 800x800px по большей стороне надо обращаться к функции Box() или widen, так как в обертках доступны только 5 простых функций: crop, frame, getImagine, setImagine, text, thumbnail, watermark
+                    $photo = Image::getImagine()->open($dir . $fileName);
+                    $photo->thumbnail(new Box(800, 800))->save($dir . $fileName, ['quality' => 90]);
+                    //$imagineObj = new Imagine();
+                    //$imageObj = $imagineObj->open(\Yii::$app->basePath . $dir . $fileName);
+                    //$imageObj->resize($imageObj->getSize()->widen(400))->save(\Yii::$app->basePath . $dir . $fileName);
+                    
+                    Yii::$app->controller->createDirectory(Yii::getAlias('@frontend/web/images/')); 
+                    Image::thumbnail($dir . $fileName, 150, 70)
+                    ->save(Yii::getAlias($dir .'thumbs/'. $fileName), ['quality' => 80]);
+                }
+
     }
 }
