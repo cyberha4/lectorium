@@ -1,12 +1,19 @@
-<div class="main-default-index">
-    <h1><?= $this->context->action->uniqueId ?></h1>
+<?php
+use \Yii;
+use \yii\widgets\ListView;
+
+?>
+<div class="main-lecture-index">
     <p>
-        This is the view content for action "<?= $this->context->action->id ?>".
-        The action belongs to the controller "<?= get_class($this->context) ?>"
-        in the "<?= $this->context->module->id ?>" module.
+        <div class="col-xs-12">
+        <?= ListView::widget([
+            'dataProvider' => $dataProvider,
+            'layout' => '{items}{pager}',
+            'itemOptions' => ['class' => 'item'],
+            'itemView' => '_view'
+        ]) ?>
+    </div>
+
     </p>
-    <p>
-        You may customize this page by editing the following file:<br>
-        <code><?= __FILE__ ?></code>
-    </p>
+
 </div>

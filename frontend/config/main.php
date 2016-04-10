@@ -11,6 +11,7 @@ return [
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'controllerNamespace' => 'frontend\controllers',
+    'defaultRoute' => 'main/lecture',
     'modules' => [
          'user' => [
              'class' => 'budyaga\users\Module',
