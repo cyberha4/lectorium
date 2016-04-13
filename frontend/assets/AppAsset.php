@@ -20,8 +20,16 @@ class AppAsset extends AssetBundle
     public $css = [
         'css/site.css',
         'css/new.css',
+        'css/chocolat.css',
+        'css/style.css',
     ];
     public $js = [
+    'js/jquery.chocolat.js',
+    'js/move-top.js',
+    'js/responsiveslides.min.js',
+    'js/easing.js',
+    'js/modernizr.custom.97074.js',
+    'js/jquery-1.11.0.min.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',

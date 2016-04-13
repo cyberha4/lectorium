@@ -1,5 +1,5 @@
 <?php
-use \Yii;
+
 use \yii\widgets\ListView;
 
 ?>
