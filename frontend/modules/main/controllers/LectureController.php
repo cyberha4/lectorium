@@ -3,7 +3,7 @@
 namespace frontend\modules\main\controllers;
 
 use Yii;
-use frontend\modules\main\models\Lecture;
+use common\models\Lecture;
 use yii\web\NotFoundHttpException;
 use yii\data\ActiveDataProvider;
 use yii\helpers\ArrayHelper;
