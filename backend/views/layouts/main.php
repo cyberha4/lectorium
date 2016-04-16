@@ -36,9 +36,14 @@ AppAsset::register($this);
     ]);
     $menuItems = [
         ['label' => 'Website', 'url' => '/'],
-        ['label' => 'Home', 'url' => ['/site/index']],
         ['label' => 'Lecture', 'url' => ['/main/lecture/index']],
     ];
+    if(\Yii::$app->user->can('userManage')) {
+        $menuItems[] = ['label' => 'user-admin', 'url' => ['/user/admin']];
+    }
+    if(\Yii::$app->user->can('rbacManage')) {
+        $menuItems[] = ['label' => 'rbac', 'url' => ['/user/rbac']];
+    }
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
     } else {

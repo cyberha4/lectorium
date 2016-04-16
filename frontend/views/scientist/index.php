@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\Html;
+use yii\widgets\ListView;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
@@ -13,28 +14,12 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="scientist-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
-    <p>
-        <?= Html::a('Create Scientist', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
-    <div class = 'table-responsive'>
-        <?= GridView::widget([
-            'dataProvider' => $dataProvider,
-            'filterModel' => $searchModel,
-            'columns' => [
-                ['class' => 'yii\grid\SerialColumn'],
-    
-                'id',
-                'name',
-                'city',
-                'biography:ntext',
-                'achievements:ntext',
-                'status',
-                // 'image',
-    
-                ['class' => 'yii\grid\ActionColumn'],
-            ],
-        ]); ?>
+    <div class = 'row'>
+            <?= ListView::widget([
+                'dataProvider' => $dataProvider,
+                'layout' => '{items}{pager}',
+                'itemOptions' => ['class' => 'item'],
+                'itemView' => '_view'
+            ]) ?>
     </div>
 </div>

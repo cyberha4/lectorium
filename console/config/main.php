@@ -12,7 +12,7 @@ return [
     'bootstrap' => ['log'],
     'controllerNamespace' => 'console\controllers',
     'components' => [
-        'user' => '',//так решается проблнма размещенияя компонента user в common
+        'user' => '',//так решается проблема размещенияя компонента user в common
         'log' => [
             'targets' => [
                 [

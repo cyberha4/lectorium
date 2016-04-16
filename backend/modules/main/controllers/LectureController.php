@@ -34,7 +34,8 @@ class LectureController extends Controller
                 'rules' => [
                     [
                         'allow' => true,
-                        'roles' => ['AcessBackend'],
+                        'actions' => ['index', 'view'],
+                        'roles' => ['AcessToBackend'],
                     ],
                     [
                         'allow' => true,
@@ -43,9 +44,9 @@ class LectureController extends Controller
                     ],
                     [
                         'allow' => true,
-                        'actions' => ['update'],
+                        'actions' => ['update', 'delete'],
                         'matchCallback' => function ($rule, $action) {
-                        return Yii::$app->user->can('ScientistUpdate', ['scientist' => $this->findModel(Yii::$app->request->get('id'))]);
+                        return Yii::$app->user->can('LectureUpdate', ['lecture' => $this->findModel(Yii::$app->request->get('id'))]);
                     }
                     ],
                 ],
