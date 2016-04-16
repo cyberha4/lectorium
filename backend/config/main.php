@@ -17,9 +17,9 @@ return [
         ],
     ],
     'components' => [
-       //'request' => [
-       //    'baseUrl' => 'admin/',
-       //],
+       'request' => [
+           'baseUrl' => '/admin',
+       ],
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,

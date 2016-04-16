@@ -31,12 +31,15 @@ class LectureController extends Controller
             ],
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['create', 'update'],
                 'rules' => [
                     [
                         'allow' => true,
+                        'roles' => ['AcessBackend'],
+                    ],
+                    [
+                        'allow' => true,
                         'actions' => ['create'],
-                        'roles' => ['ScientistCreate'],
+                        'roles' => ['LectureCreate'],
                     ],
                     [
                         'allow' => true,

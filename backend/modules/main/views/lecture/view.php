@@ -17,6 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
         <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('test', '/?id='.$model->id, ['class' => 'btn btn-primary']) ?>
         <a href = "http://clearyii2.loc/main/lecture/view?id=<?= $model->id ?>" class = "btn btn-primary">Просмотреть</a>
         <?= Html::a('Delete', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
@@ -25,7 +26,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 'method' => 'post',
             ],
         ]) ?>
-
+        <a href = "<?= Url::to('/main/lecture/view') ?>" class = "btn btn-primary">Просмотреть</a><br>
+         <?= Url::toRoute(['@sait/view', 'id' => 42]) ?>
     </p>
 
     <?= DetailView::widget([

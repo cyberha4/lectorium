@@ -35,6 +35,7 @@ AppAsset::register($this);
         ],
     ]);
     $menuItems = [
+        ['label' => 'Website', 'url' => '/'],
         ['label' => 'Home', 'url' => ['/site/index']],
         ['label' => 'Lecture', 'url' => ['/main/lecture/index']],
     ];
@@ -55,6 +56,7 @@ AppAsset::register($this);
         'items' => $menuItems,
     ]);
     NavBar::end();
+    \c_log(2);
     ?>
 
     <div class="container">
